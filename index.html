@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="./assets/css/stylesheet.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div>
+        <img id="imgbox" src="assets/img/00.jpg">
+    </div>
+    <div>
+
+
+        <button id="backward" onclick="backward()">
+            <<</button> <button id="forward" onclick="forward()">>>
+        </button>
+
+        <br>
+    </div>
+    <div>
+        <button id="playbtn" onclick="play()">PLAY</button>
+        <button id="pausebtn" onclick="pause()">PAUSE</button>
+
+
+
+    </div>
+   <script>
+        var i = 0;
+        var timer = null;
+
+        function forward() {
+            if (document.getElementById("imgbox").src = "assets/img/00.jpg" && i == 0) {
+                i++;
+                document.getElementById("imgbox").src = "assets/img/01.jpg";
+            } else if (document.getElementById("imgbox").src = "assets/img/01.jpg" && i == 1) {
+                i++;
+                document.getElementById("imgbox").src = "assets/img/02.jpg"
+            } else if (document.getElementById("imgbox").src = "assets/img/02.jpg" && i == 2) {
+                i = 0;
+                document.getElementById("imgbox").src = "assets/img/00.jpg"
+
+            }
+        }
+
+        function backward() {
+
+            if (document.getElementById("imgbox").src = "assets/img/02.jpg" && i == 2) {
+                i = i - 1;
+                document.getElementById("imgbox").src = "assets/img/01.jpg";
+            } else if (document.getElementById("imgbox").src = "assets/img/01.jpg" && i == 1) {
+                i = i - 1;
+                document.getElementById("imgbox").src = "assets/img/00.jpg";
+            } else if (document.getElementById("imgbox").src = "assets/img/00.jpg" && i == 0) {
+                i = 2;
+                document.getElementById("imgbox").src = "assets/img/02.jpg"
+            }
+        }
+
+
+        function play() {
+            document.getElementById("playbtn").style.visibility = "hidden";
+            document.getElementById("pausebtn").style.visibility = "visible";
+
+            timer = setInterval(function() {
+                forward()
+            }, 600);
+
+        }
+
+        function pause() {
+            document.getElementById("playbtn").style.visibility = "visible";
+            document.getElementById("pausebtn").style.visibility = "hidden";
+            clearInterval(timer);
+
+        }
+
+        window.addEventListener("keydown", checkKeyPressed, false);
+
+        function checkKeyPressed(e) {
+            if (e.keyCode == "39") {
+                forward();
+            }
+
+            if (e.keyCode == "37") {
+                backward();
+            }
+        }
+
+    </script>
+</body>
+
+</html>
